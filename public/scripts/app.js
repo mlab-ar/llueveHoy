@@ -129,10 +129,10 @@ function renderForecast(card, data) {
     tile.querySelector(".date").textContent = forecastFor;
     tile.querySelector(".icon").className = `icon ${forecast.icon}`;
     tile.querySelector(".temp-high .value").textContent = Math.round(
-      forecast.temperatureHigh
+      (forecast.temperatureHigh - 32) * (5 / 9)
     );
     tile.querySelector(".temp-low .value").textContent = Math.round(
-      forecast.temperatureLow
+      (forecast.temperatureLow - 32) * (5 / 9)
     );
   });
 
@@ -254,9 +254,12 @@ function loadLocationList() {
     }
   }
   if (!locations || Object.keys(locations).length === 0) {
-    const key = "40.7720232,-73.9732319";
+    const key = "-34.6131516,-58.3772316";
     locations = {};
-    locations[key] = { label: "New York City", geo: "40.7720232,-73.9732319" };
+    locations[key] = {
+      label: "Ciudad Autonoma de Buenos Aires",
+      geo: "-34.6131516,-58.3772316"
+    };
   }
   return locations;
 }
