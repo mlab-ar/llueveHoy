@@ -4,56 +4,52 @@ let deferredInstallPrompt = null;
 const installButton = document.getElementById("butInstall");
 installButton.addEventListener("click", installPWA);
 
-// TODO: Add event listener for beforeinstallprompt event
+//Agregar escucha de eventos para el evento beforeinstallprompt
 window.addEventListener("beforeinstallprompt", saveBeforeInstallPromptEvent);
 
 /**
- * Event handler for beforeinstallprompt event.
- *   Saves the event & shows install button.
+ * Controlador de eventos para el evento beforeinstallprompt.
+ * Guarda el evento y muestra el botón de instalación.
  *
  * @param {Event} evt
  */
 function saveBeforeInstallPromptEvent(evt) {
-  //TODO: Add code to save event and show the install button.
+  //Para guardar el evento y muestre el botón de instalación.
   deferredInstallPrompt = evt;
   installButton.removeAttribute("hidden");
-  // Our html file already has installButton defined and installButton refers to it.
 }
 
 /**
- * Event handler for butInstall - Does the PWA installation.
+ * Controlador de eventos para butInstall: realiza la instalación PWA.
  *
  * @param {Event} evt
  */
 function installPWA(evt) {
-  // TODO: Add code show install prompt & hide the install button.
+  //Para que muestre el mensaje de instalación y oculte el botón de instalación.
   deferredInstallPrompt.prompt();
-
-  // Hide the install Button as it had been called (it cant be called twice)
+  // Ocultar el botón de instalación, no se puede llamar dos veces.
   evt.srcElement.setAttribute("hidden", true);
-  //installButton.setAttribute('hidden'); // could be an alternative way?
-
-  // CODELAB: Log user response to prompt.
+  //Registre la respuesta del usuario a la solicitud.
   deferredInstallPrompt.userChoice.then(choice => {
     if (choice.outcome === "accepted") {
-      console.log("User accepted A2HS prompt", choice);
+      console.log("El Usuario Acepto la Solicitud", choice);
     } else {
-      console.log("User dismissed A2HS prompt", choice);
+      console.log("El Usuario no Acepto la Solicitud", choice);
     }
     deferredInstallPrompt = null;
   });
 }
 
-// TODO: Add event listener for appinstalled event
+//Agregar escucha de eventos para el evento appinstalled.
 window.addEventListener("appinstalled", logAppInstalled);
 
 /**
- * Event handler for appinstalled event.
- *   Log the installation to analytics or save the event somehow.
+ * Controlador de eventos para el evento appinstalled.
+ * Registre la instalación en analytics o guarde el evento de alguna manera.
  *
  * @param {Event} evt
  */
 function logAppInstalled(evt) {
-  // TODO: Add code to log the event
-  console.log("Weather App was installed.", evt);
+  //Para registrar el evento
+  console.log("Aplicación LlueveHoy Instalada.", evt);
 }

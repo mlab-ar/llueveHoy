@@ -1,43 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Llueve hoy? | Matelab</title>
+    <meta name="codelab" content="pwa-clima-matelab-v1" />
+    <link rel="stylesheet" type="text/css" href="/styles/inline.css" />
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+
     <!--Manifest-->
     <link rel="manifest" href="/manifest.json" />
-
     <!-- iOS meta tags and icons -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="PWA Clima" />
     <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
-
     <!-- Add description here -->
-    <meta
-      name="description"
-      content="Un simple aplicación meteorológica hecha por Matelab!"
-    />
-
-    <!--Service worker-->
-    <script>
-      //Register service worker.
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/service-worker.js").then(reg => {
-            console.log("Service worker registered.", reg);
-          });
-        });
-      }
-    </script>
-
+    <meta name="description" content="Un simple aplicación meteorológica hecha por Matelab!"/>
     <!-- Meta theme-color -->
-    <meta name="theme-color" content="#2F3BA2" />
-
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Llueve hoy? | Matelab</title>
-    <meta name="codelab" content="your-first-pwa-v3" />
-    <link rel="stylesheet" type="text/css" href="/styles/inline.css" />
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <meta name="theme-color" content="#2bbb4f" />
   </head>
   <body>
     <header class="header">
@@ -55,7 +37,6 @@
       <button id="butAdd" class="fab" aria-label="Add">
         <span class="icon add"></span>
       </button>
-
       <div id="weather-template" class="weather-card" hidden>
         <div class="card-spinner">
           <svg viewBox="0 0 32 32" width="32" height="32">
@@ -77,21 +58,19 @@
           </div>
           <div class="description">
             <div class="humidity">
-              <span class="label">Humidity:</span>
+              <span class="label">Humedad:</span>
               <span class="value"></span><span class="scale">%</span>
             </div>
             <div class="wind">
-              <span class="label">Wind:</span>
-              <span class="value"></span>
-              <span class="scale">mph</span>
-              <span class="direction"></span>°
+              <span class="label">Sensación Térmica:</span>
+              <span class="value"></span><span class="scale">°C</span>
             </div>
             <div class="sunrise">
-              <span class="label">Sunrise:</span>
+              <span class="label">Salidad del Sol:</span>
               <span class="value"></span>
             </div>
             <div class="sunset">
-              <span class="label">Sunset:</span>
+              <span class="label">Puesta del Sol:</span>
               <span class="value"></span>
             </div>
           </div>
@@ -188,10 +167,17 @@
 
     <script src="/scripts/luxon-1.11.4.js"></script>
     <script src="/scripts/app.js"></script>
+    <!-- Install script here -->
     <script src="/scripts/install.js"></script>
-
     <script>
-      // CODELAB: Register service worker.
+      //Register service worker.
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js").then(reg => {
+            console.log("Service worker registered.", reg);
+          });
+        });
+      }
     </script>
   </body>
 </html>

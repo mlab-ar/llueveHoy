@@ -97,19 +97,18 @@ function renderForecast(card, data) {
   card.querySelector(
     ".current .icon"
   ).className = `icon ${data.currently.icon}`;
-
   card.querySelector(".current .temperature .value").textContent = Math.round(
-    (data.currently.temperature - 32) * (5 / 9)
+   data.currently.temperature
   );
   card.querySelector(".current .humidity .value").textContent = Math.round(
     data.currently.humidity * 100
   );
   card.querySelector(".current .wind .value").textContent = Math.round(
-    data.currently.windSpeed
+    data.currently.apparentTemperature
   );
-  card.querySelector(".current .wind .direction").textContent = Math.round(
+  /*card.querySelector(".current .wind .direction").textContent = Math.round(
     data.currently.windBearing
-  );
+  );*/
   const sunrise = luxon.DateTime.fromSeconds(data.daily.data[0].sunriseTime)
     .setZone(data.timezone)
     .toFormat("t");
@@ -129,10 +128,10 @@ function renderForecast(card, data) {
     tile.querySelector(".date").textContent = forecastFor;
     tile.querySelector(".icon").className = `icon ${forecast.icon}`;
     tile.querySelector(".temp-high .value").textContent = Math.round(
-      (forecast.temperatureHigh - 32) * (5 / 9)
+      forecast.temperatureHigh
     );
     tile.querySelector(".temp-low .value").textContent = Math.round(
-      (forecast.temperatureLow - 32) * (5 / 9)
+      forecast.temperatureLow
     );
   });
 
@@ -256,10 +255,7 @@ function loadLocationList() {
   if (!locations || Object.keys(locations).length === 0) {
     const key = "-34.6131516,-58.3772316";
     locations = {};
-    locations[key] = {
-      label: "Ciudad Autonoma de Buenos Aires",
-      geo: "-34.6131516,-58.3772316"
-    };
+    locations[key] = { label: "Ciudad Autonoma de Buenos Aires", geo: "-34.6131516,-58.3772316" };
   }
   return locations;
 }
